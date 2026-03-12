@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Politique d'annulation — Sororichill</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#FFFDF8',
+              100: '#FFF4E0',
+              200: '#F5F0E8',
+              300: '#D4B9A7',
+              400: '#C35817',
+              500: '#5C3D2E',
+              600: '#4A2040',
+              700: '#1A1A1A',
+            },
+            accent: {
+              DEFAULT: '#C35817',
+              light: '#E8836B',
+              warm: '#CB6B52',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Outfit', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .hidden { display: none !important; }
+    @media print {
+      nav, footer { display: none; }
+      body { font-size: 12pt; }
+      .no-print { display: none; }
+      section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body class="bg-brand-50 font-sans text-brand-700 antialiased">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-brand-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 group">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" class="h-8 w-8">
+          <g fill="none" stroke="#C35817" stroke-width="70" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M700 300 A280 280 0 1 0 700 724"></path>
+            <path d="M640 360 C520 260 360 360 480 460 C620 560 420 640 380 700"></path>
+          </g>
+        </svg>
+        <span class="font-display font-bold text-xl text-accent">Sororichill</span>
+      </a>
+      <div class="hidden sm:flex items-center gap-6">
+        <nav class="flex items-center gap-6 text-sm font-medium">
+          <a href="index.html" data-i18n="nav.home" class="text-brand-500 hover:text-accent transition-colors">Accueil</a>
+          <a href="privacy.html" data-i18n="nav.privacy" class="text-brand-500 hover:text-accent transition-colors">Politique de confidentialité</a>
+          <a href="terms.html" data-i18n="nav.terms" class="text-brand-500 hover:text-accent transition-colors">Conditions d'utilisation</a>
+          <a href="cancellation.html" data-i18n="nav.cancellation" class="text-accent border-b-2 border-accent pb-0.5">Politique d'annulation</a>
+        </nav>
+        <!-- Language toggle -->
+        <div class="flex items-center rounded-full border border-brand-300/50 overflow-hidden text-sm">
+          <button onclick="langToggle.set('fr')" id="lang-fr" class="px-3 py-1 font-medium transition-colors">FR</button>
+          <button onclick="langToggle.set('en')" id="lang-en" class="px-3 py-1 font-medium transition-colors">EN</button>
+        </div>
+      </div>
+      <!-- Mobile menu button -->
+      <button id="mobile-menu-btn" class="sm:hidden p-2 rounded-lg hover:bg-brand-100 transition-colors" aria-label="Menu">
+        <svg class="w-5 h-5 text-brand-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <!-- Mobile nav -->
+    <div id="mobile-menu" class="hidden sm:hidden border-t border-brand-200 bg-white px-4 py-3 space-y-2">
+      <a href="index.html" data-i18n="nav.home" class="block text-sm text-brand-500 hover:text-accent py-1">Accueil</a>
+      <a href="privacy.html" data-i18n="nav.privacy" class="block text-sm text-brand-500 hover:text-accent py-1">Politique de confidentialité</a>
+      <a href="terms.html" data-i18n="nav.terms" class="block text-sm text-brand-500 hover:text-accent py-1">Conditions d'utilisation</a>
+      <a href="cancellation.html" data-i18n="nav.cancellation" class="block text-sm text-accent font-semibold py-1">Politique d'annulation</a>
+      <!-- Mobile language toggle -->
+      <div class="flex items-center rounded-full border border-brand-300/50 overflow-hidden text-sm w-fit mt-2">
+        <button onclick="langToggle.set('fr')" id="lang-fr-mobile" class="px-3 py-1 font-medium transition-colors">FR</button>
+        <button onclick="langToggle.set('en')" id="lang-en-mobile" class="px-3 py-1 font-medium transition-colors">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="bg-gradient-to-br from-brand-50 via-brand-100 to-[#FFE8D6] py-16 sm:py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+      <h1 data-i18n="hero.title" class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-brand-700 mb-4">Politique d'annulation</h1>
+      <p class="text-brand-500 text-base sm:text-lg"><span data-i18n="hero.date">Date d'effet&nbsp;: <strong>11 mars 2025</strong></span></p>
+    </div>
+  </section>
+
+  <!-- ==================== FRENCH CONTENT ==================== -->
+  <main id="content-fr" class="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-12">
+
+    <!-- Introduction -->
+    <section>
+      <div class="prose prose-brand space-y-3 text-brand-700/90 leading-relaxed">
+        <p>La présente Politique d'annulation décrit les conditions dans lesquelles les réservations d'activités effectuées via l'application <strong>Sororichill</strong> peuvent être annulées, ainsi que les modalités de remboursement applicables. En utilisant notre plateforme, vous acceptez les termes de cette politique.</p>
+      </div>
+    </section>
+
+    <!-- 1. Annulation par les participantes -->
+    <section>
+      <h2 class="font-display font-bold text-xl sm:text-2xl text-brand-700 mb-4 flex items-center gap-2">
+        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 text-accent text-sm font-bold">1</span>
+        Annulation par les participantes
+      </h2>
+      <div class="space-y-3 text-brand-700/90 leading-relaxed">
+        <p>En tant que participante, vous pouvez annuler une réservation d'activité à tout moment avant le début de celle-ci. Les conditions de remboursement dépendent du délai d'annulation&nbsp;:</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li><strong>Plus de 48 heures avant l'activité&nbsp;:</strong> vous bénéficiez d'un <strong>remboursement intégral</strong> du montant payé.</li>
+          <li><strong>Moins de 48 heures avant l'activité&nbsp;:</strong> <strong>aucun remboursement</strong> ne sera accordé. Cette mesure vise à protéger les organisatrices qui ont déjà engagé des frais pour préparer l'activité.</li>
+        </ul>
+        <p>L'annulation s'effectue directement depuis l'application, dans la section <strong>«&nbsp;Mes réservations&nbsp;»</strong>. Un e-mail de confirmation vous sera envoyé une fois l'annulation traitée.</p>
+      </div>
+    </section>
+
+    <!-- 2. Annulation par les organisatrices -->
+    <section>
+      <h2 class="font-display font-bold text-xl sm:text-2xl text-brand-700 mb-4 flex items-center gap-2">
+        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 text-accent text-sm font-bold">2</span>
+        Annulation par les organisatrices
+      </h2>
+      <div class="space-y-3 text-brand-700/90 leading-relaxed">
+        <p>Les organisatrices peuvent être amenées à annuler une activité pour des raisons indépendantes de leur volonté (conditions météorologiques, nombre insuffisant de participantes, circonstances exceptionnelles, etc.).</p>
+        <p>En cas d'annulation par l'organisatrice&nbsp;:</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Toutes les participantes inscrites reçoivent un <strong>remboursement intégral automatique</strong>.</li>
+          <li>Une notification est envoyée à chaque participante pour l'informer de l'annulation.</li>
+          <li>Le remboursement est déclenché automatiquement, sans aucune démarche de votre part.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 3. Politique de non-présentation (no-show) -->
+    <section>
+      <h2 class="font-display font-bold text-xl sm:text-2xl text-brand-700 mb-4 flex items-center gap-2">
+        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 text-accent text-sm font-bold">3</span>
+        Non-présentation (no-show)
+      </h2>
+      <div class="space-y-3 text-brand-700/90 leading-relaxed">
+        <p>Si vous ne vous présentez pas à une activité pour laquelle vous êtes inscrite, sans avoir procédé à une annulation préalable, <strong>aucun remboursement ne sera accordé</strong>.</p>
+        <p>Nous vous encourageons à annuler votre réservation dès que possible si vous savez que vous ne pourrez pas y assister, afin de libérer votre place pour d'autres participantes.</p>
+      </div>
+    </section>
+
+    <!-- 4. Délais et modalités de remboursement -->
+    <section>
+      <h2 class="font-display font-bold text-xl sm:text-2xl text-brand-700 mb-4 flex items-center gap-2">
+        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 text-accent text-sm font-bold">4</span>
+        Délais et modalités de remboursement
+      </h2>
+      <div class="space-y-3 text-brand-700/90 leading-relaxed">
+        <p>Lorsqu'un remboursement est applicable, celui-ci est traité dans les conditions suivantes&nbsp;:</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Le remboursement est effectué via le <strong>moyen de paiement original</strong> utilisé lors de la réservation.</li>
+          <li>Le délai de traitement est de <strong>5 à 10 jours ouvrés</strong> à compter de la date d'annulation.</li>
+          <li>Le délai exact peut varier en fonction de votre établissement bancaire ou de votre fournisseur de paiement.</li>
+        </ul>
+        <p>Si vous n'avez pas reçu votre remboursement dans un délai de 10 jours ouvrés, nous vous invitons à vérifier auprès de votre banque, puis à nous contacter si le problème persiste.</p>
+      </div>
+    </section>
+
+    <!-- 5. Modifications d'activités -->
+    <section>
+      <h2 class="font-display font-bold text-xl sm:text-2xl text-brand-700 mb-4 flex items-center gap-2">
+        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 text-accent text-sm font-bold">5</span>
+        Modifications d'activités
+      </h2>
+      <div class="space-y-3 text-brand-700/90 leading-relaxed">
+        <p>Si une organisatrice modifie substantiellement une activité (date, heure, lieu ou nature de l'activité) après votre inscription, vous avez la possibilité de&nbsp;:</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li><strong>Accepter</strong> les modifications et conserver votre réservation.</li>
+          <li><strong>Annuler</strong> votre réservation et obtenir un remboursement intégral, quel que soit le délai restant avant l'activité.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. Modifications de cette politique -->
+    <section>
+      <h2 class="font-display font-bold text-xl sm:text-2xl text-brand-700 mb-4 flex items-center gap-2">
+        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 text-accent text-sm font-bold">6</span>
+        Modifications de cette politique
+      </h2>
+      <div class="space-y-3 text-brand-700/90 leading-relaxed">
+        <p>Sororichill se réserve le droit de <strong>modifier la présente Politique d'annulation</strong> à tout moment. En cas de modification substantielle, nous vous en informerons par&nbsp;:</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Une notification dans l'application.</li>
+          <li>Un e-mail envoyé à l'adresse associée à votre compte.</li>
+          <li>Une mise à jour de la date d'effet figurant en haut de cette page.</li>
+        </ul>
+        <p>Les réservations effectuées avant l'entrée en vigueur des nouvelles conditions restent soumises à la politique en vigueur au moment de la réservation.</p>
+      </div>
+    </section>
+
+    <!-- 7. Contact -->
+    <section class="rounded-xl bg-gradient-to-br from-brand-100 to-brand-200/60 p-6 sm:p-8">
+      <h2 class="font-display font-bold text-xl sm:text-2xl text-brand-700 mb-4 flex items-center gap-2">
+        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 text-accent text-sm font-bold">7</span>
+        Contact
+      </h2>
+      <div class="space-y-3 text-brand-700/90 leading-relaxed">
+        <p>Pour toute question relative à cette Politique d'annulation ou à une demande de remboursement, vous pouvez nous contacter à&nbsp;:</p>
+        <a href="mailto:sororichill@gmail.com" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-brand-500 text-white font-semibold text-sm hover:bg-brand-700 transition-colors shadow-sm mt-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+          sororichill@gmail.com
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== ENGLISH CONTENT ==================== -->
+  <main id="content-en" class="hidden max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-12">
+
+    <!-- Introduction -->
+    <section>
+      <div class="prose prose-brand space-y-3 text-brand-700/90 leading-relaxed">
+        <p>This Cancellation Policy describes the conditions under which activity bookings made through the <strong>Sororichill</strong> application may be cancelled, as well as the applicable refund terms. By using our platform, you agree to the terms of this policy.</p>
+      </div>
+    </section>
+
+    <!-- 1. Cancellation by Participants -->
+    <section>
+      <h2 class="font-display font-bold text-xl sm:text-2xl text-brand-700 mb-4 flex items-center gap-2">
+        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 text-accent text-sm font-bold">1</span>
+        Cancellation by Participants
+      </h2>
+      <div class="space-y-3 text-brand-700/90 leading-relaxed">
+        <p>As a participant, you may cancel an activity booking at any time before the activity begins. Refund conditions depend on the cancellation timeframe:</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li><strong>More than 48 hours before the activity:</strong> you will receive a <strong>full refund</strong> of the amount paid.</li>
+          <li><strong>Less than 48 hours before the activity:</strong> <strong>no refund</strong> will be issued. This measure protects organizers who have already incurred costs in preparing the activity.</li>
+        </ul>
+        <p>Cancellations are made directly through the app, in the <strong>"My Bookings"</strong> section. A confirmation email will be sent once the cancellation has been processed.</p>
+      </div>
+    </section>
+
+    <!-- 2. Cancellation by Organizers -->
+    <section>
+      <h2 class="font-display font-bold text-xl sm:text-2xl text-brand-700 mb-4 flex items-center gap-2">
+        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 text-accent text-sm font-bold">2</span>
+        Cancellation by Organizers
+      </h2>
+      <div class="space-y-3 text-brand-700/90 leading-relaxed">
+        <p>Organizers may need to cancel an activity for reasons beyond their control (weather conditions, insufficient number of participants, exceptional circumstances, etc.).</p>
+        <p>In the event of cancellation by the organizer:</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>All registered participants receive an <strong>automatic full refund</strong>.</li>
+          <li>A notification is sent to each participant to inform them of the cancellation.</li>
+          <li>The refund is triggered automatically, with no action required on your part.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 3. No-Show Policy -->
+    <section>
+      <h2 class="font-display font-bold text-xl sm:text-2xl text-brand-700 mb-4 flex items-center gap-2">
+        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 text-accent text-sm font-bold">3</span>
+        No-Show Policy
+      </h2>
+      <div class="space-y-3 text-brand-700/90 leading-relaxed">
+        <p>If you fail to attend an activity for which you are registered, without having cancelled in advance, <strong>no refund will be issued</strong>.</p>
+        <p>We encourage you to cancel your booking as soon as possible if you know you will be unable to attend, so that your spot can be made available to other participants.</p>
+      </div>
+    </section>
+
+    <!-- 4. Refund Processing -->
+    <section>
+      <h2 class="font-display font-bold text-xl sm:text-2xl text-brand-700 mb-4 flex items-center gap-2">
+        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 text-accent text-sm font-bold">4</span>
+        Refund Processing
+      </h2>
+      <div class="space-y-3 text-brand-700/90 leading-relaxed">
+        <p>When a refund is applicable, it is processed under the following conditions:</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Refunds are issued via the <strong>original payment method</strong> used at the time of booking.</li>
+          <li>Processing time is <strong>5 to 10 business days</strong> from the date of cancellation.</li>
+          <li>The exact timeframe may vary depending on your bank or payment provider.</li>
+        </ul>
+        <p>If you have not received your refund within 10 business days, we recommend checking with your bank first, then contacting us if the issue persists.</p>
+      </div>
+    </section>
+
+    <!-- 5. Activity Modifications -->
+    <section>
+      <h2 class="font-display font-bold text-xl sm:text-2xl text-brand-700 mb-4 flex items-center gap-2">
+        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 text-accent text-sm font-bold">5</span>
+        Activity Modifications
+      </h2>
+      <div class="space-y-3 text-brand-700/90 leading-relaxed">
+        <p>If an organizer substantially modifies an activity (date, time, location, or nature of the activity) after your registration, you have the option to:</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li><strong>Accept</strong> the changes and keep your booking.</li>
+          <li><strong>Cancel</strong> your booking and receive a full refund, regardless of the time remaining before the activity.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. Changes to This Policy -->
+    <section>
+      <h2 class="font-display font-bold text-xl sm:text-2xl text-brand-700 mb-4 flex items-center gap-2">
+        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 text-accent text-sm font-bold">6</span>
+        Changes to This Policy
+      </h2>
+      <div class="space-y-3 text-brand-700/90 leading-relaxed">
+        <p>Sororichill reserves the right to <strong>modify this Cancellation Policy</strong> at any time. In the event of a substantial change, we will notify you by:</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>A notification within the application.</li>
+          <li>An email sent to the address associated with your account.</li>
+          <li>An update to the effective date at the top of this page.</li>
+        </ul>
+        <p>Bookings made before the new terms take effect remain subject to the policy in force at the time of booking.</p>
+      </div>
+    </section>
+
+    <!-- 7. Contact -->
+    <section class="rounded-xl bg-gradient-to-br from-brand-100 to-brand-200/60 p-6 sm:p-8">
+      <h2 class="font-display font-bold text-xl sm:text-2xl text-brand-700 mb-4 flex items-center gap-2">
+        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 text-accent text-sm font-bold">7</span>
+        Contact
+      </h2>
+      <div class="space-y-3 text-brand-700/90 leading-relaxed">
+        <p>For any questions regarding this Cancellation Policy or a refund request, you can contact us at:</p>
+        <a href="mailto:sororichill@gmail.com" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-brand-500 text-white font-semibold text-sm hover:bg-brand-700 transition-colors shadow-sm mt-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+          sororichill@gmail.com
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-brand-700 text-brand-200 mt-12">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-10">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" class="h-6 w-6">
+            <g fill="none" stroke="#C35817" stroke-width="70" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M700 300 A280 280 0 1 0 700 724"></path>
+              <path d="M640 360 C520 260 360 360 480 460 C620 560 420 640 380 700"></path>
+            </g>
+          </svg>
+          <span class="font-display font-bold text-lg text-white">Sororichill</span>
+        </div>
+        <nav class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm">
+          <a href="privacy.html" data-i18n="footer.privacy" class="hover:text-white transition-colors">Politique de confidentialité</a>
+          <a href="terms.html" data-i18n="footer.terms" class="hover:text-white transition-colors">Conditions d'utilisation</a>
+          <a href="cancellation.html" data-i18n="footer.cancellation" class="hover:text-white transition-colors">Politique d'annulation</a>
+          <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener noreferrer" data-i18n="footer.eula" class="hover:text-white transition-colors">CLUF Apple</a>
+        </nav>
+      </div>
+      <div class="mt-6 pt-6 border-t border-brand-500/30 text-center text-sm text-brand-300">
+        &copy; 2025 Sororichill. <span data-i18n="footer.rights">Tous droits réservés.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-btn').addEventListener('click', function () {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Translation strings for nav/header/footer
+    const translations = {
+      fr: {
+        'nav.home': 'Accueil',
+        'nav.privacy': 'Politique de confidentialité',
+        'nav.terms': "Conditions d'utilisation",
+        'nav.cancellation': "Politique d'annulation",
+        'hero.title': "Politique d'annulation",
+        'hero.date': "Date d'effet\u00a0: <strong>11 mars 2025</strong>",
+        'footer.privacy': 'Politique de confidentialité',
+        'footer.terms': "Conditions d'utilisation",
+        'footer.cancellation': "Politique d'annulation",
+        'footer.eula': 'CLUF Apple',
+        'footer.rights': 'Tous droits réservés.'
+      },
+      en: {
+        'nav.home': 'Home',
+        'nav.privacy': 'Privacy Policy',
+        'nav.terms': 'Terms of Service',
+        'nav.cancellation': 'Cancellation Policy',
+        'hero.title': 'Cancellation Policy',
+        'hero.date': 'Effective date: <strong>March 11, 2025</strong>',
+        'footer.privacy': 'Privacy Policy',
+        'footer.terms': 'Terms of Service',
+        'footer.cancellation': 'Cancellation Policy',
+        'footer.eula': 'Apple EULA',
+        'footer.rights': 'All rights reserved.'
+      }
+    };
+
+    // Language toggle system
+    const langToggle = {
+      set(lang) {
+        document.getElementById('content-fr').classList.toggle('hidden', lang !== 'fr');
+        document.getElementById('content-en').classList.toggle('hidden', lang !== 'en');
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (translations[lang][key]) el.innerHTML = translations[lang][key];
+        });
+        document.documentElement.lang = lang;
+        document.title = lang === 'fr' ? "Politique d'annulation — Sororichill" : "Cancellation Policy — Sororichill";
+        // Update toggle button styles
+        ['', '-mobile'].forEach(suffix => {
+          const frBtn = document.getElementById('lang-fr' + suffix);
+          const enBtn = document.getElementById('lang-en' + suffix);
+          if (frBtn && enBtn) {
+            frBtn.className = 'px-3 py-1 font-medium transition-colors ' + (lang === 'fr' ? 'bg-accent text-white' : 'text-brand-500 hover:text-accent');
+            enBtn.className = 'px-3 py-1 font-medium transition-colors ' + (lang === 'en' ? 'bg-accent text-white' : 'text-brand-500 hover:text-accent');
+          }
+        });
+        localStorage.setItem('lang', lang);
+      }
+    };
+
+    // Auto-detect language: saved preference > browser language > French default
+    const savedLang = localStorage.getItem('lang');
+    const browserLang = navigator.language.startsWith('fr') ? 'fr' : 'en';
+    langToggle.set(savedLang || browserLang);
+  </script>
+
+</body>
+</html>
