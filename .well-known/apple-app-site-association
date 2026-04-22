@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["LKKTY68568.app.sororichill"],
+        "components": [
+          {
+            "/": "/activities/*",
+            "comment": "Sororichill activity detail deep links"
+          }
+        ]
+      }
+    ]
+  }
+}

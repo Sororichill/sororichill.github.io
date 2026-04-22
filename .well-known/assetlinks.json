@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.sororichill",
+      "sha256_cert_fingerprints": [
+        "29:8B:A8:8C:70:9D:61:F8:A8:E1:96:DD:07:24:40:B9:00:68:41:AA:53:65:9D:CD:C8:36:28:6D:E3:8C:BE:3C",
+        "B2:62:97:4C:0E:71:51:4A:2C:8D:07:55:6B:AE:EC:DF:57:72:30:7F:56:00:19:E7:82:27:28:4A:3C:79:E1:6C"
+      ]
+    }
+  }
+]

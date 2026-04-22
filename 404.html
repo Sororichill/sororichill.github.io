@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sororichill</title>
+  <meta name="description" content="Opening Sororichill…">
+  <meta name="theme-color" content="#C35817">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    h1, h2, .heading { font-family: 'Outfit', 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen bg-[#FFFDF8] text-[#1A1A1A]">
+  <noscript>
+    <div class="max-w-xl mx-auto px-6 py-16 text-center">
+      <h1 class="heading text-3xl font-extrabold mb-4">Sororichill</h1>
+      <p class="mb-6">To open this link, please install the app:</p>
+      <p class="space-x-3">
+        <a class="underline" href="https://apps.apple.com/us/app/sororichill/id6760420583">App Store</a>
+        <a class="underline" href="https://play.google.com/store/apps/details?id=app.sororichill">Play Store</a>
+      </p>
+    </div>
+  </noscript>
+
+  <div id="loader" class="max-w-xl mx-auto px-6 py-24 text-center">
+    <h1 class="heading text-3xl font-extrabold mb-3">Sororichill</h1>
+    <p class="text-[#5C3D2E]" id="loader-msg">Opening…</p>
+  </div>
+
+  <script>
+    (function () {
+      var APP_STORE_URL  = 'https://apps.apple.com/us/app/sororichill/id6760420583';
+      var PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=app.sororichill';
+      var HOME_URL       = 'https://sororichill.com/';
+
+      var path = window.location.pathname || '';
+      var ua = navigator.userAgent || '';
+      var isAndroid = /android/i.test(ua);
+      var isIOS = /iphone|ipad|ipod/i.test(ua) ||
+                  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+      // Match /activities/<id> (with or without trailing slash or extra segments).
+      var activityMatch = path.match(/^\/activities\/([^\/?#]+)/);
+
+      function setMessage(msg, withLinks) {
+        var el = document.getElementById('loader-msg');
+        if (!el) return;
+        el.textContent = msg;
+        if (withLinks) {
+          var wrap = document.createElement('p');
+          wrap.className = 'mt-6 space-x-3';
+          var a1 = document.createElement('a');
+          a1.href = APP_STORE_URL;
+          a1.className = 'underline';
+          a1.textContent = 'App Store';
+          var a2 = document.createElement('a');
+          a2.href = PLAY_STORE_URL;
+          a2.className = 'underline';
+          a2.textContent = 'Play Store';
+          wrap.appendChild(a1);
+          wrap.appendChild(document.createTextNode(' · '));
+          wrap.appendChild(a2);
+          el.parentNode.appendChild(wrap);
+        }
+      }
+
+      if (!activityMatch) {
+        // Unknown path — show a soft 404 with links home.
+        setMessage('Page not found. Head back to sororichill.com.', true);
+        setTimeout(function () { window.location.replace(HOME_URL); }, 1500);
+        return;
+      }
+
+      // Known activity path — send to the right store / home.
+      if (isIOS) {
+        setMessage('Opening the App Store…');
+        window.location.replace(APP_STORE_URL);
+      } else if (isAndroid) {
+        setMessage('Opening the Play Store…');
+        window.location.replace(PLAY_STORE_URL);
+      } else {
+        setMessage('Install Sororichill to open this activity.', true);
+      }
+    })();
+  </script>
+</body>
+</html>
