@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sororichill</title>
   <meta name="description" content="Opening Sororichill…">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta name="theme-color" content="#C35817">
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon.png">
@@ -103,9 +106,9 @@
       function scheduleRedirect(url, msg) {
         setMessage(msg, true);
         redirectTimer = setTimeout(function () {
-          if (cancelled) return;
+          if (cancelled || document.visibilityState === 'hidden') return;
           window.location.replace(url);
-        }, 1500);
+        }, 3000);
       }
 
       if (isIOS) {
