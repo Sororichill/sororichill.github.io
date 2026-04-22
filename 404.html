@@ -34,7 +34,8 @@
 
   <div id="loader" class="max-w-xl mx-auto px-6 py-24 text-center">
     <h1 class="heading text-3xl font-extrabold mb-3">Sororichill</h1>
-    <p class="text-[#5C3D2E]" id="loader-msg">Opening…</p>
+    <p class="text-[#5C3D2E] mb-8" id="loader-msg">Open this activity in the Sororichill app.</p>
+    <div id="store-links" class="flex flex-col sm:flex-row gap-3 justify-center"></div>
   </div>
 
   <script>
@@ -52,71 +53,41 @@
       // Match /activities/<id> (with or without trailing slash or extra segments).
       var activityMatch = path.match(/^\/activities\/([^\/?#]+)/);
 
-      function setMessage(msg, withLinks) {
+      function setMessage(msg) {
         var el = document.getElementById('loader-msg');
-        if (!el) return;
-        el.textContent = msg;
-        if (withLinks) {
-          var wrap = document.createElement('p');
-          wrap.className = 'mt-6 space-x-3';
-          var a1 = document.createElement('a');
-          a1.href = APP_STORE_URL;
-          a1.className = 'underline';
-          a1.textContent = 'App Store';
-          var a2 = document.createElement('a');
-          a2.href = PLAY_STORE_URL;
-          a2.className = 'underline';
-          a2.textContent = 'Play Store';
-          wrap.appendChild(a1);
-          wrap.appendChild(document.createTextNode(' · '));
-          wrap.appendChild(a2);
-          el.parentNode.appendChild(wrap);
-        }
+        if (el) el.textContent = msg;
+      }
+
+      function addStoreButton(href, label) {
+        var container = document.getElementById('store-links');
+        if (!container) return;
+        var a = document.createElement('a');
+        a.href = href;
+        a.className = 'inline-block px-6 py-3 rounded-full bg-[#C35817] text-white font-semibold hover:bg-[#A84A14] transition';
+        a.textContent = label;
+        container.appendChild(a);
       }
 
       if (!activityMatch) {
-        // Unknown path — show a soft 404 with links home.
-        setMessage('Page not found. Head back to sororichill.com.', true);
-        setTimeout(function () { window.location.replace(HOME_URL); }, 1500);
+        // Unknown path — show a soft 404 with a link home.
+        setMessage('Page not found.');
+        addStoreButton(HOME_URL, 'Back to sororichill.com');
         return;
       }
 
       // Known activity path. If the app is installed, the Universal Link /
-      // App Link handoff will background this page before our redirect fires.
-      // We use visibilitychange + pagehide to detect that and cancel the
-      // store redirect so users aren't bounced to the App Store after the
-      // app has already opened.
-      var redirectTimer = null;
-      var cancelled = false;
-
-      function cancelRedirect() {
-        cancelled = true;
-        if (redirectTimer) {
-          clearTimeout(redirectTimer);
-          redirectTimer = null;
-        }
-      }
-
-      document.addEventListener('visibilitychange', function () {
-        if (document.visibilityState === 'hidden') cancelRedirect();
-      });
-      window.addEventListener('pagehide', cancelRedirect);
-      window.addEventListener('blur', cancelRedirect);
-
-      function scheduleRedirect(url, msg) {
-        setMessage(msg, true);
-        redirectTimer = setTimeout(function () {
-          if (cancelled || document.visibilityState === 'hidden') return;
-          window.location.replace(url);
-        }, 3000);
-      }
-
+      // App Link handoff will open the app directly and this page is never
+      // shown. If it reaches here, the user doesn't have the app — show
+      // store buttons but do NOT auto-redirect (auto-redirect races with
+      // the UL handoff and can bounce users to the store after the app
+      // already opened).
       if (isIOS) {
-        scheduleRedirect(APP_STORE_URL, 'Opening Sororichill…');
+        addStoreButton(APP_STORE_URL, 'Get it on the App Store');
       } else if (isAndroid) {
-        scheduleRedirect(PLAY_STORE_URL, 'Opening Sororichill…');
+        addStoreButton(PLAY_STORE_URL, 'Get it on Google Play');
       } else {
-        setMessage('Install Sororichill to open this activity.', true);
+        addStoreButton(APP_STORE_URL, 'App Store');
+        addStoreButton(PLAY_STORE_URL, 'Google Play');
       }
     })();
   </script>
