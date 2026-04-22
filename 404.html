@@ -20,9 +20,9 @@
     h1, h2, .heading { font-family: 'Outfit', 'Inter', sans-serif; }
   </style>
 </head>
-<body class="min-h-screen bg-[#FFFDF8] text-[#1A1A1A]">
+<body class="h-screen overflow-hidden bg-[#FFFDF8] text-[#1A1A1A] flex items-center justify-center">
   <noscript>
-    <div class="max-w-xl mx-auto px-6 py-16 text-center">
+    <div class="max-w-xl mx-auto px-6 text-center">
       <h1 class="heading text-3xl font-extrabold mb-4">Sororichill</h1>
       <p class="mb-6">To open this link, please install the app:</p>
       <p class="space-x-3">
@@ -32,7 +32,8 @@
     </div>
   </noscript>
 
-  <div id="loader" class="max-w-xl mx-auto px-6 py-24 text-center">
+  <div id="loader" class="max-w-xl mx-auto px-6 text-center">
+    <img src="/favicon.png" alt="Sororichill" class="mx-auto mb-6 w-24 h-24 rounded-2xl shadow-md">
     <h1 class="heading text-3xl font-extrabold mb-3">Sororichill</h1>
     <p class="text-[#5C3D2E] mb-8" id="loader-msg">Open this activity in the Sororichill app.</p>
     <div id="store-links" class="flex flex-col sm:flex-row gap-3 justify-center"></div>
