@@ -78,13 +78,40 @@
         return;
       }
 
-      // Known activity path — send to the right store / home.
+      // Known activity path. If the app is installed, the Universal Link /
+      // App Link handoff will background this page before our redirect fires.
+      // We use visibilitychange + pagehide to detect that and cancel the
+      // store redirect so users aren't bounced to the App Store after the
+      // app has already opened.
+      var redirectTimer = null;
+      var cancelled = false;
+
+      function cancelRedirect() {
+        cancelled = true;
+        if (redirectTimer) {
+          clearTimeout(redirectTimer);
+          redirectTimer = null;
+        }
+      }
+
+      document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'hidden') cancelRedirect();
+      });
+      window.addEventListener('pagehide', cancelRedirect);
+      window.addEventListener('blur', cancelRedirect);
+
+      function scheduleRedirect(url, msg) {
+        setMessage(msg, true);
+        redirectTimer = setTimeout(function () {
+          if (cancelled) return;
+          window.location.replace(url);
+        }, 1500);
+      }
+
       if (isIOS) {
-        setMessage('Opening the App Store…');
-        window.location.replace(APP_STORE_URL);
+        scheduleRedirect(APP_STORE_URL, 'Opening Sororichill…');
       } else if (isAndroid) {
-        setMessage('Opening the Play Store…');
-        window.location.replace(PLAY_STORE_URL);
+        scheduleRedirect(PLAY_STORE_URL, 'Opening Sororichill…');
       } else {
         setMessage('Install Sororichill to open this activity.', true);
       }
