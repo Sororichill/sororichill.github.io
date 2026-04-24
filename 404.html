@@ -37,7 +37,7 @@
       <h1 class="heading text-3xl font-extrabold mb-4">Sororichill</h1>
       <p class="mb-6">To open this link, please install the app:</p>
       <p class="space-x-3">
-        <a class="underline" href="https://apps.apple.com/us/app/sororichill/id6760420583">App Store</a>
+        <a class="underline" href="https://apps.apple.com/app/sororichill/id6760420583">App Store</a>
         <a class="underline" href="https://play.google.com/store/apps/details?id=app.sororichill">Play Store</a>
       </p>
     </div>
@@ -52,8 +52,9 @@
 
   <script>
     (function () {
-      var APP_STORE_URL  = 'https://apps.apple.com/us/app/sororichill/id6760420583';
+      var APP_STORE_URL  = 'https://apps.apple.com/app/sororichill/id6760420583';
       var PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=app.sororichill';
+      var ANDROID_INSTALL_URL = '/install/';
       var HOME_URL       = 'https://sororichill.com/';
 
       var path = window.location.pathname || '';
@@ -88,15 +89,16 @@
       }
 
       // Known activity path. If the app is installed, the Universal Link /
-      // App Link handoff will open the app directly and this page is never
-      // shown. If it reaches here, the user doesn't have the app — show
-      // store buttons but do NOT auto-redirect (auto-redirect races with
-      // the UL handoff and can bounce users to the store after the app
-      // already opened).
+      // App Link handoff intercepts BEFORE this page loads, so if we got
+      // here the app is not installed. Safe to auto-redirect to the
+      // appropriate install destination. Show a fallback button in case
+      // the redirect is blocked.
       if (isIOS) {
         addStoreButton(APP_STORE_URL, 'Get it on the App Store');
+        window.location.replace(APP_STORE_URL);
       } else if (isAndroid) {
-        addStoreButton(PLAY_STORE_URL, 'Get it on Google Play');
+        addStoreButton(ANDROID_INSTALL_URL, 'Get it on Google Play');
+        window.location.replace(ANDROID_INSTALL_URL);
       } else {
         addStoreButton(APP_STORE_URL, 'App Store');
         addStoreButton(PLAY_STORE_URL, 'Google Play');

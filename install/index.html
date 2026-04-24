@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sororichill — Installer l'application</title>
+  <meta name="description" content="Installez Sororichill sur votre téléphone.">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta name="theme-color" content="#C35817">
+  <meta property="og:title" content="Sororichill — Installer l'application">
+  <meta property="og:description" content="Installez Sororichill sur iOS ou Android.">
+  <meta property="og:image" content="https://sororichill.com/favicon.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    h1, h2, .heading { font-family: 'Outfit', 'Inter', sans-serif; }
+    .step-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 2rem; height: 2rem; border-radius: 9999px;
+      background: #C35817; color: white; font-weight: 700; flex-shrink: 0;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#FFFDF8] text-[#1A1A1A]">
+  <noscript>
+    <div class="max-w-xl mx-auto px-6 py-12 text-center">
+      <h1 class="heading text-3xl font-extrabold mb-4">Sororichill</h1>
+      <p class="mb-6">Pour installer l'application :</p>
+      <p class="space-x-3">
+        <a class="underline" href="https://apps.apple.com/app/sororichill/id6760420583">App Store</a>
+        <a class="underline" href="https://play.google.com/store/apps/details?id=app.sororichill">Google Play</a>
+      </p>
+    </div>
+  </noscript>
+
+  <div id="app" class="max-w-xl mx-auto px-6 py-10">
+    <div class="text-center mb-8">
+      <img src="/favicon.png" alt="Sororichill" class="mx-auto mb-5 w-20 h-20 rounded-2xl shadow-md">
+      <h1 class="heading text-3xl font-extrabold" data-i18n="title">Installer Sororichill</h1>
+      <p class="text-[#5C3D2E] mt-2" id="subtitle" data-i18n="subtitle">Redirection…</p>
+    </div>
+
+    <div id="desktop-links" class="hidden flex-col sm:flex-row gap-3 justify-center mt-6">
+      <a href="https://apps.apple.com/app/sororichill/id6760420583"
+         class="inline-block text-center px-6 py-3 rounded-full bg-[#C35817] text-white font-semibold hover:bg-[#A84A14] transition">
+        App Store
+      </a>
+      <a href="https://docs.google.com/forms/d/18KQXKcAqrducV8PKgalKSL4KHvWPU6t9QhLJdHy3fOo/viewform" target="_blank" rel="noopener"
+         class="inline-block text-center px-6 py-3 rounded-full bg-[#C35817] text-white font-semibold hover:bg-[#A84A14] transition">
+        Google Play (beta)
+      </a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var APP_STORE_URL = 'https://apps.apple.com/app/sororichill/id6760420583';
+      var ANDROID_FORM_URL = 'https://docs.google.com/forms/d/18KQXKcAqrducV8PKgalKSL4KHvWPU6t9QhLJdHy3fOo/viewform';
+      var ua = navigator.userAgent || '';
+      var isAndroid = /android/i.test(ua);
+      var isIOS = /iphone|ipad|ipod/i.test(ua) ||
+                  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+      var lang = (navigator.language || 'en').toLowerCase().startsWith('fr') ? 'fr' : 'en';
+      var strings = {
+        fr: {
+          title: 'Installer Sororichill',
+          subtitleIOS: 'Redirection vers l\u2019App Store\u2026',
+          subtitleAndroid: 'Redirection vers le formulaire b\u00eata\u2026',
+          subtitleDesktop: 'Ouvrez cette page sur votre t\u00e9l\u00e9phone pour installer l\u2019app.'
+        },
+        en: {
+          title: 'Install Sororichill',
+          subtitleIOS: 'Redirecting to the App Store\u2026',
+          subtitleAndroid: 'Redirecting to the beta form\u2026',
+          subtitleDesktop: 'Open this page on your phone to install the app.'
+        }
+      };
+      var t = strings[lang];
+
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach(function (el) {
+        var key = el.getAttribute('data-i18n');
+        if (t[key]) el.textContent = t[key];
+      });
+
+      var subtitle = document.getElementById('subtitle');
+
+      if (isIOS) {
+        subtitle.textContent = t.subtitleIOS;
+        window.location.replace(APP_STORE_URL);
+        return;
+      }
+
+      if (isAndroid) {
+        subtitle.textContent = t.subtitleAndroid;
+        window.location.replace(ANDROID_FORM_URL);
+        return;
+      }
+
+      subtitle.textContent = t.subtitleDesktop;
+      var desktop = document.getElementById('desktop-links');
+      desktop.classList.remove('hidden');
+      desktop.classList.add('flex');
+    })();
+  </script>
+</body>
+</html>
