@@ -17,6 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="3ca301d8-0eb5-44f6-8b2c-50a3ce48848c"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
@@ -49,10 +50,14 @@
 
     <div id="desktop-links" class="hidden flex-col sm:flex-row gap-3 justify-center mt-6">
       <a href="https://apps.apple.com/app/sororichill/id6760420583"
+         data-umami-event="install_click_app_store"
+         data-umami-event-source="desktop"
          class="inline-block text-center px-6 py-3 rounded-full bg-[#C35817] text-white font-semibold hover:bg-[#A84A14] transition">
         App Store
       </a>
       <a href="https://docs.google.com/forms/d/18KQXKcAqrducV8PKgalKSL4KHvWPU6t9QhLJdHy3fOo/viewform" target="_blank" rel="noopener"
+         data-umami-event="install_click_play_store"
+         data-umami-event-source="desktop"
          class="inline-block text-center px-6 py-3 rounded-full bg-[#C35817] text-white font-semibold hover:bg-[#A84A14] transition">
         Google Play (beta)
       </a>
@@ -93,15 +98,24 @@
 
       var subtitle = document.getElementById('subtitle');
 
+      function trackAndRedirect(eventName, url) {
+        try {
+          if (window.umami && typeof window.umami.track === 'function') {
+            window.umami.track(eventName);
+          }
+        } catch (e) {}
+        setTimeout(function () { window.location.replace(url); }, 300);
+      }
+
       if (isIOS) {
         subtitle.textContent = t.subtitleIOS;
-        window.location.replace(APP_STORE_URL);
+        trackAndRedirect('install_redirect_ios', APP_STORE_URL);
         return;
       }
 
       if (isAndroid) {
         subtitle.textContent = t.subtitleAndroid;
-        window.location.replace(ANDROID_FORM_URL);
+        trackAndRedirect('install_redirect_android', ANDROID_FORM_URL);
         return;
       }
 
