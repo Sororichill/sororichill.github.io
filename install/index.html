@@ -34,9 +34,9 @@
         ANDROID_FORM_URL: ANDROID_FORM_URL
       };
 
-      // Send a Umami pageview + event via sendBeacon so it survives the
-      // imminent window.location.replace. This is fire-and-forget.
-      function beacon(eventName) {
+      // Send a Umami event using fetch + keepalive so it survives the
+      // imminent window.location.replace. Fire-and-forget.
+      function track(eventName) {
         try {
           var payload = {
             type: 'event',
@@ -51,24 +51,24 @@
               name: eventName
             }
           };
-          var blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
-          if (navigator.sendBeacon) {
-            navigator.sendBeacon('https://cloud.umami.is/api/send', blob);
-          }
+          fetch('https://cloud.umami.is/api/send', {
+            method: 'POST',
+            mode: 'cors',
+            keepalive: true,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          }).catch(function () {});
         } catch (e) {}
       }
 
-      if (isIOS) {
-        beacon('install_redirect_ios');
-        window.location.replace(APP_STORE_URL);
-        return;
+      function go(eventName, url) {
+        track(eventName);
+        // Tiny delay lets the fetch enter the network queue before navigation.
+        setTimeout(function () { window.location.replace(url); }, 50);
       }
 
-      if (isAndroid) {
-        beacon('install_redirect_android');
-        window.location.replace(ANDROID_FORM_URL);
-        return;
-      }
+      if (isIOS) { go('install_redirect_ios', APP_STORE_URL); return; }
+      if (isAndroid) { go('install_redirect_android', ANDROID_FORM_URL); return; }
     })();
   </script>
 
