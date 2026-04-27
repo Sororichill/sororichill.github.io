@@ -101,7 +101,7 @@
   <section class="bg-gradient-to-br from-brand-50 via-brand-100 to-[#FFE8D6] py-16 sm:py-20">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
       <h1 data-i18n="hero.title" class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-brand-700 mb-4">Conditions d'utilisation</h1>
-      <p class="text-brand-500 text-base sm:text-lg"><span data-i18n="hero.date">Date d'effet&nbsp;: <strong>11 mars 2026</strong></span></p>
+      <p class="text-brand-500 text-base sm:text-lg"><span data-i18n="hero.date">Date d'effet&nbsp;: <strong>27 avril 2026</strong></span></p>
     </div>
   </section>
 
@@ -253,16 +253,15 @@
         <div>
           <h3 class="font-semibold text-brand-700 mb-2">Annulation par l'utilisatrice</h3>
           <ul class="list-disc pl-6 space-y-1">
-            <li>Toute annulation effectuée <strong>48 heures ou plus</strong> avant le début de l'activité donne droit à un remboursement intégral.</li>
-            <li>Les annulations effectuées entre <strong>24 et 48 heures</strong> avant l'activité peuvent donner lieu à un remboursement partiel (50&nbsp;%).</li>
-            <li>Les annulations effectuées <strong>moins de 24 heures</strong> avant l'activité ne sont généralement pas remboursables, sauf circonstances exceptionnelles.</li>
+            <li><strong>Plus de 48 heures avant l'activité&nbsp;:</strong> vous êtes remboursée du montant payé, <strong>déduction faite des frais de service de 5&nbsp;%</strong> retenus par la plateforme. Les activités <strong>Sororichill Originals</strong>, sans frais de service, donnent lieu à un <strong>remboursement intégral</strong>.</li>
+            <li><strong>Moins de 48 heures avant l'activité&nbsp;:</strong> l'annulation n'est <strong>pas disponible</strong>, sauf si l'organisatrice a <strong>substantiellement modifié</strong> l'activité (date, heure, lieu ou nature) pendant cette fenêtre. Dans ce cas, vous pouvez annuler et bénéficier du remboursement décrit ci-dessus.</li>
           </ul>
         </div>
         <div>
           <h3 class="font-semibold text-brand-700 mb-2">Annulation par l'organisatrice</h3>
           <ul class="list-disc pl-6 space-y-1">
             <li>Si une organisatrice annule une activité, les participantes inscrites reçoivent un <strong>remboursement intégral</strong>.</li>
-            <li>L'organisatrice prend en charge les <strong>frais de service de la plateforme</strong> (5&nbsp;%, plafonnés à 4,99&nbsp;€ par réservation) sur chaque remboursement. Ce montant est déduit de ses prochains versements ou apparaît comme un solde dû en l'absence d'activités à venir.</li>
+            <li>Pour valider l'annulation, l'organisatrice doit <strong>régler à l'avance</strong>, via Stripe, des <strong>frais de service de plateforme de 5&nbsp;%</strong> du prix de l'activité <strong>par réservation à rembourser</strong>. Tant que ces frais ne sont pas payés, l'annulation n'est pas confirmée. Les activités <strong>Sororichill Originals</strong> sont exemptées de ces frais.</li>
             <li>Les annulations répétées par une organisatrice peuvent entraîner des sanctions, y compris la suspension de son compte.</li>
           </ul>
         </div>
@@ -283,6 +282,7 @@
         <p>Les paiements sur Sororichill sont traités de manière sécurisée via <strong>Stripe</strong>. En effectuant un paiement, vous acceptez les conditions suivantes&nbsp;:</p>
         <ul class="list-disc pl-6 space-y-1">
           <li>Tous les paiements sont effectués en <strong>euros (€)</strong>, sauf indication contraire.</li>
+          <li>Un <strong>frais de service Sororichill de 5&nbsp;%</strong> est ajouté au prix de l'activité au moment du paiement et apparaît clairement sur le récapitulatif avant validation. Les activités <strong>Sororichill Originals</strong> ne comportent pas de frais de service.</li>
           <li>Sororichill ne stocke pas vos informations de carte bancaire. Celles-ci sont traitées directement par Stripe conformément aux normes de sécurité <strong>PCI DSS</strong>.</li>
           <li>Des frais de transaction peuvent s'appliquer et seront clairement indiqués avant la finalisation du paiement.</li>
           <li>En cas de litige concernant un paiement, veuillez nous contacter à <a href="mailto:sororichill@gmail.com" class="text-accent hover:underline">sororichill@gmail.com</a> dans un délai de 30 jours.</li>
@@ -585,7 +585,7 @@
         Activity Listings
       </h2>
       <div class="space-y-3 text-brand-700/90 leading-relaxed">
-        <p>Hosts who publish activities on Sororichill agree to:</p>
+        <p>Organizers who publish activities on Sororichill agree to:</p>
         <ul class="list-disc pl-6 space-y-1">
           <li>Provide <strong>accurate and complete</strong> descriptions of the proposed activity, including location, date, time, price, and participation conditions.</li>
           <li>Ensure that the activity complies with applicable laws and regulations.</li>
@@ -606,10 +606,10 @@
       <div class="space-y-3 text-brand-700/90 leading-relaxed">
         <p>When you book an activity through Sororichill:</p>
         <ul class="list-disc pl-6 space-y-1">
-          <li>Your booking is subject to <strong>availability</strong> and confirmation by the host.</li>
+          <li>Your booking is subject to <strong>availability</strong> and confirmation by the organizer.</li>
           <li>You will receive a <strong>confirmation</strong> by notification and/or email once the booking is validated.</li>
-          <li>By making a booking, you agree to abide by the specific conditions of the activity, as defined by the host.</li>
-          <li>Sororichill acts as an <strong>intermediary</strong> between users and hosts and does not guarantee that the activity will take place.</li>
+          <li>By making a booking, you agree to abide by the specific conditions of the activity, as defined by the organizer.</li>
+          <li>Sororichill acts as an <strong>intermediary</strong> between users and organizers and does not guarantee that the activity will take place.</li>
         </ul>
       </div>
     </section>
@@ -624,17 +624,16 @@
         <div>
           <h3 class="font-semibold text-brand-700 mb-2">Cancellation by the User</h3>
           <ul class="list-disc pl-6 space-y-1">
-            <li>Any cancellation made <strong>48 hours or more</strong> before the start of the activity is eligible for a full refund.</li>
-            <li>Cancellations made between <strong>24 and 48 hours</strong> before the activity may be eligible for a partial refund (50%).</li>
-            <li>Cancellations made <strong>less than 24 hours</strong> before the activity are generally non-refundable, except in exceptional circumstances.</li>
+            <li><strong>More than 48 hours before the activity:</strong> you are refunded the amount paid, <strong>minus the 5% platform service fee</strong> retained by Sororichill. <strong>Sororichill Originals</strong>, which carry no service fee, are <strong>refunded in full</strong>.</li>
+            <li><strong>Less than 48 hours before the activity:</strong> cancellation is <strong>not available</strong>, unless the organizer has <strong>substantially modified</strong> the activity (date, time, location, or nature) within that window. In that case, you may cancel and receive the refund described above.</li>
           </ul>
         </div>
         <div>
-          <h3 class="font-semibold text-brand-700 mb-2">Cancellation by the Host</h3>
+          <h3 class="font-semibold text-brand-700 mb-2">Cancellation by the Organizer</h3>
           <ul class="list-disc pl-6 space-y-1">
-            <li>If a host cancels an activity, registered participants will receive a <strong>full refund</strong>.</li>
-            <li>The host absorbs the <strong>platform service fee</strong> (5%, capped at €4.99 per booking) on each refund. This amount is deducted from their next payouts, or appears as an outstanding balance recovered from subsequent payments if no future activities are scheduled.</li>
-            <li>Repeated cancellations by a host may result in sanctions, including account suspension.</li>
+            <li>If an organizer cancels an activity, registered participants will receive a <strong>full refund</strong>.</li>
+            <li>To complete the cancellation, the organizer must <strong>pay an upfront platform service fee</strong> via Stripe equal to <strong>5% of the activity price</strong> <strong>per refundable booking</strong>. The cancellation is not confirmed until that fee is settled. <strong>Sororichill Originals</strong> are exempt from this fee.</li>
+            <li>Repeated cancellations by an organizer may result in sanctions, including account suspension.</li>
           </ul>
         </div>
         <div>
@@ -654,6 +653,7 @@
         <p>Payments on Sororichill are processed securely through <strong>Stripe</strong>. By making a payment, you accept the following conditions:</p>
         <ul class="list-disc pl-6 space-y-1">
           <li>All payments are made in <strong>euros (€)</strong>, unless otherwise indicated.</li>
+          <li>A <strong>5% Sororichill service fee</strong> is added to the activity price at checkout and is clearly displayed in the order summary before confirmation. <strong>Sororichill Originals</strong> carry no service fee.</li>
           <li>Sororichill does not store your credit card information. It is processed directly by Stripe in accordance with <strong>PCI DSS</strong> security standards.</li>
           <li>Transaction fees may apply and will be clearly indicated before payment is finalized.</li>
           <li>In the event of a payment dispute, please contact us at <a href="mailto:sororichill@gmail.com" class="text-accent hover:underline">sororichill@gmail.com</a> within 30 days.</li>
@@ -661,14 +661,14 @@
       </div>
     </section>
 
-    <!-- 10. Host Responsibilities -->
+    <!-- 10. Organizer Responsibilities -->
     <section>
       <h2 class="font-display font-bold text-xl sm:text-2xl text-brand-700 mb-4 flex items-center gap-2">
         <span class="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 text-accent text-sm font-bold">10</span>
-        Host Responsibilities
+        Organizer Responsibilities
       </h2>
       <div class="space-y-3 text-brand-700/90 leading-relaxed">
-        <p>Activity hosts on Sororichill have the following responsibilities:</p>
+        <p>Activity organizers on Sororichill have the following responsibilities:</p>
         <ul class="list-disc pl-6 space-y-1">
           <li>Provide <strong>accurate and non-misleading</strong> descriptions of their activities.</li>
           <li>Ensure the <strong>physical safety</strong> of participants throughout the activity.</li>
@@ -681,11 +681,11 @@
       </div>
     </section>
 
-    <!-- 11. Host Approval -->
+    <!-- 11. Organizer Approval -->
     <section>
       <h2 class="font-display font-bold text-xl sm:text-2xl text-brand-700 mb-4 flex items-center gap-2">
         <span class="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 text-accent text-sm font-bold">11</span>
-        Host Approval
+        Organizer Approval
       </h2>
       <div class="space-y-3 text-brand-700/90 leading-relaxed">
         <p>Sororichill reserves the right, at its sole discretion, to:</p>
@@ -693,7 +693,7 @@
           <li><strong>Approve or reject</strong> any activity listing request.</li>
           <li>Request additional information or documentation before authorizing publication.</li>
           <li><strong>Suspend or remove</strong> a published activity if it does not comply with these terms or is the subject of complaints.</li>
-          <li>Revoke host status in the event of repeated violations of the platform's rules.</li>
+          <li>Revoke organizer status in the event of repeated violations of the platform's rules.</li>
         </ul>
         <p>Approval or rejection decisions are final and may not be appealed, except as provided by law.</p>
       </div>
@@ -712,7 +712,7 @@
           <li>Application maintenance and development.</li>
           <li>User support.</li>
         </ul>
-        <p>The applicable commission rate is communicated to hosts upon registration and may be revised with <strong>30 days' notice</strong>. Hosts receive the balance of the transaction amount after deduction of the commission and payment fees.</p>
+        <p>The applicable commission rate is communicated to organizers upon registration and may be revised with <strong>30 days' notice</strong>. Organizers receive the balance of the transaction amount after deduction of the commission and payment fees.</p>
       </div>
     </section>
 
@@ -753,9 +753,9 @@
         Limitation of Liability
       </h2>
       <div class="space-y-3 text-brand-700/90 leading-relaxed">
-        <p>Sororichill is a <strong>connection platform</strong> between users and activity hosts. As such:</p>
+        <p>Sororichill is a <strong>connection platform</strong> between users and activity organizers. As such:</p>
         <ul class="list-disc pl-6 space-y-1">
-          <li>Sororichill does not guarantee the quality, safety, or legality of activities offered by hosts.</li>
+          <li>Sororichill does not guarantee the quality, safety, or legality of activities offered by organizers.</li>
           <li>Sororichill shall not be held liable for any <strong>direct, indirect, incidental, special, or consequential damages</strong> resulting from the use of the platform or participation in an activity.</li>
           <li>Sororichill's total liability, from all causes combined, is limited to the amount you have actually paid to Sororichill in the <strong>preceding 12 months</strong>.</li>
           <li>Sororichill does not guarantee that the platform will be available without interruption, free of errors, or free of viruses.</li>
@@ -776,7 +776,7 @@
           <li>Your use of the platform or violation of these terms.</li>
           <li>Content you post on the platform.</li>
           <li>Your violation of any third-party rights.</li>
-          <li>Any activity you host through Sororichill.</li>
+          <li>Any activity you organize through Sororichill.</li>
         </ul>
       </div>
     </section>
@@ -889,7 +889,7 @@
         'nav.terms': "Conditions d'utilisation",
         'nav.cancellation': "Politique d'annulation",
         'hero.title': "Conditions d'utilisation",
-        'hero.date': "Date d'effet\u00a0: <strong>11 mars 2026</strong>",
+        'hero.date': "Date d'effet\u00a0: <strong>27 avril 2026</strong>",
         'footer.privacy': 'Politique de confidentialité',
         'footer.terms': "Conditions d'utilisation",
         'footer.cancellation': "Politique d'annulation",
@@ -902,7 +902,7 @@
         'nav.terms': 'Terms of Service',
         'nav.cancellation': 'Cancellation Policy',
         'hero.title': 'Terms of Service',
-        'hero.date': 'Effective date: <strong>March 11, 2026</strong>',
+        'hero.date': 'Effective date: <strong>April 27, 2026</strong>',
         'footer.privacy': 'Privacy Policy',
         'footer.terms': 'Terms of Service',
         'footer.cancellation': 'Cancellation Policy',
