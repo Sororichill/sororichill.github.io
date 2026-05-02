@@ -20,7 +20,7 @@
     // Mobile users never see the page; only desktop reaches the styled UI below.
     (function () {
       var APP_STORE_URL = 'https://apps.apple.com/app/sororichill/id6760420583';
-      var ANDROID_FORM_URL = 'https://docs.google.com/forms/d/18KQXKcAqrducV8PKgalKSL4KHvWPU6t9QhLJdHy3fOo/viewform';
+      var PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=app.sororichill';
       var ua = navigator.userAgent || '';
       var isAndroid = /android/i.test(ua);
       var isIOS = /iphone|ipad|ipod/i.test(ua) ||
@@ -31,7 +31,7 @@
         isIOS: isIOS,
         isAndroid: isAndroid,
         APP_STORE_URL: APP_STORE_URL,
-        ANDROID_FORM_URL: ANDROID_FORM_URL
+        PLAY_STORE_URL: PLAY_STORE_URL
       };
 
       // Send a Umami event using fetch + keepalive so it survives the
@@ -68,7 +68,7 @@
       }
 
       if (isIOS) { go('install_redirect_ios', APP_STORE_URL); return; }
-      if (isAndroid) { go('install_redirect_android', ANDROID_FORM_URL); return; }
+      if (isAndroid) { go('install_redirect_android', PLAY_STORE_URL); return; }
     })();
   </script>
 
@@ -139,11 +139,11 @@
          data-umami-event="install_click_app_store"
          data-umami-event-source="desktop"
          class="btn">App Store</a>
-      <a href="https://docs.google.com/forms/d/18KQXKcAqrducV8PKgalKSL4KHvWPU6t9QhLJdHy3fOo/viewform"
+      <a href="https://play.google.com/store/apps/details?id=app.sororichill"
          target="_blank" rel="noopener"
          data-umami-event="install_click_play_store"
          data-umami-event-source="desktop"
-         class="btn">Google Play (beta)</a>
+         class="btn">Google Play</a>
     </div>
   </div>
 
@@ -155,13 +155,13 @@
         fr: {
           title: 'Installer Sororichill',
           subtitleIOS: 'Redirection vers l\u2019App Store\u2026',
-          subtitleAndroid: 'Redirection vers le formulaire b\u00eata\u2026',
+          subtitleAndroid: 'Redirection vers le Play Store\u2026',
           subtitleDesktop: 'Ouvrez cette page sur votre t\u00e9l\u00e9phone pour installer l\u2019app.'
         },
         en: {
           title: 'Install Sororichill',
           subtitleIOS: 'Redirecting to the App Store\u2026',
-          subtitleAndroid: 'Redirecting to the beta form\u2026',
+          subtitleAndroid: 'Redirecting to the Play Store\u2026',
           subtitleDesktop: 'Open this page on your phone to install the app.'
         }
       };
