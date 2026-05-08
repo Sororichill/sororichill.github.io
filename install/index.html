@@ -14,28 +14,38 @@
   <meta name="twitter:card" content="summary">
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon.png">
+  <!-- iOS Smart App Banner — renders natively even in some in-app browsers -->
+  <meta name="apple-itunes-app" content="app-id=6760420583">
 
   <script>
-    // Fire the redirect BEFORE any CSS/font/analytics blocks rendering.
-    // Mobile users never see the page; only desktop reaches the styled UI below.
     (function () {
+      // In-app browsers often block https://apps.apple.com links entirely.
+      // Use native store URL schemes to bypass the webview and open the
+      // store app directly.
       var APP_STORE_URL = 'https://apps.apple.com/app/sororichill/id6760420583';
+      var APP_STORE_SCHEME = 'itms-apps://itunes.apple.com/app/id6760420583';
       var PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=app.sororichill';
+      var PLAY_STORE_SCHEME = 'market://details?id=app.sororichill';
       var ua = navigator.userAgent || '';
       var isAndroid = /android/i.test(ua);
       var isIOS = /iphone|ipad|ipod/i.test(ua) ||
                   (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
+      // In-app browsers block JS-driven redirects to app stores but allow
+      // user-initiated <a> taps. Detect them and show a button instead.
+      var isInAppBrowser = /musical_ly|trill_|ByteLocale/i.test(ua);
+
       window.__sc = {
         lang: (navigator.language || 'en').toLowerCase().startsWith('fr') ? 'fr' : 'en',
         isIOS: isIOS,
         isAndroid: isAndroid,
+        isInAppBrowser: isInAppBrowser,
         APP_STORE_URL: APP_STORE_URL,
-        PLAY_STORE_URL: PLAY_STORE_URL
+        APP_STORE_SCHEME: APP_STORE_SCHEME,
+        PLAY_STORE_URL: PLAY_STORE_URL,
+        PLAY_STORE_SCHEME: PLAY_STORE_SCHEME
       };
 
-      // Send a Umami event using fetch + keepalive so it survives the
-      // imminent window.location.replace. Fire-and-forget.
       function track(eventName) {
         try {
           var payload = {
@@ -61,9 +71,15 @@
         } catch (e) {}
       }
 
+      // In-app browsers: show instructions immediately, no redirect attempts.
+      if (isInAppBrowser) {
+        track(isIOS ? 'install_inapp_ios' : isAndroid ? 'install_inapp_android' : 'install_inapp_desktop');
+        return;
+      }
+
+      // Normal mobile browsers: auto-redirect as before.
       function go(eventName, url) {
         track(eventName);
-        // Tiny delay lets the fetch enter the network queue before navigation.
         setTimeout(function () { window.location.replace(url); }, 50);
       }
 
@@ -124,6 +140,77 @@
       transition: background 0.15s ease;
     }
     .btn:hover, .btn:focus { background: #A84A14; }
+    .dl-btn {
+      display: block;
+      width: 100%;
+      max-width: 20rem;
+      margin: 1.5rem auto 0;
+      padding: 1rem 1.5rem;
+      border-radius: 9999px;
+      background: #C35817;
+      color: white;
+      font-size: 1.125rem;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      transition: background 0.15s ease;
+    }
+    .dl-btn:hover, .dl-btn:focus { background: #A84A14; }
+    .open-browser-box {
+      margin: 1.5rem auto 0;
+      padding: 1.25rem 1.5rem;
+      background: #FFF7EF;
+      border: 2px solid #C35817;
+      border-radius: 1rem;
+      text-align: center;
+      max-width: 22rem;
+    }
+    .open-browser-step {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.5;
+      margin: 0 0 1rem;
+      color: #1A1A1A;
+    }
+    .open-browser-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      font-size: 1.25rem;
+    }
+    .dots-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: #E8E8E8;
+      border-radius: 0.5rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+    .arrow-icon { color: #C35817; font-weight: 700; }
+    .browser-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.4rem 1rem;
+      background: #C35817;
+      color: white;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s ease;
+    }
+    .browser-label:hover, .browser-label:focus { background: #A84A14; }
+    .dl-hint {
+      text-align: center;
+      color: #8B7355;
+      font-size: 0.8125rem;
+      margin-top: 0.75rem;
+    }
+    .hidden { display: none !important; }
   </style>
 </head>
 <body>
@@ -132,6 +219,24 @@
       <img src="/favicon.png" alt="Sororichill" class="logo">
       <h1 class="heading" id="title">Installer Sororichill</h1>
       <p class="subtitle" id="subtitle">Redirection…</p>
+    </div>
+
+    <!-- Fallback button shown after 2s if auto-redirect didn't fire -->
+    <div id="fallback-cta" class="hidden center">
+      <a id="fallback-btn" href="#" class="dl-btn">Télécharger</a>
+      <p class="dl-hint" id="fallback-hint"></p>
+    </div>
+
+    <!-- Shown in TikTok in-app browser where store links are blocked -->
+    <div id="inapp-cta" class="hidden">
+      <div class="open-browser-box">
+        <p class="open-browser-step" id="inapp-step"></p>
+        <div class="open-browser-visual">
+          <span class="dots-icon">⋯</span>
+          <span class="arrow-icon">→</span>
+          <a id="inapp-browser-link" href="#" class="browser-label">Safari</a>
+        </div>
+      </div>
     </div>
 
     <div id="desktop-links" class="links">
@@ -156,13 +261,25 @@
           title: 'Installer Sororichill',
           subtitleIOS: 'Redirection vers l\u2019App Store\u2026',
           subtitleAndroid: 'Redirection vers le Play Store\u2026',
-          subtitleDesktop: 'Ouvrez cette page sur votre t\u00e9l\u00e9phone pour installer l\u2019app.'
+          subtitleDesktop: 'Ouvrez cette page sur votre t\u00e9l\u00e9phone pour installer l\u2019app.',
+          subtitleInApp: 'Pour t\u00e9l\u00e9charger l\u2019app\u00a0:',
+          dlBtn: 'T\u00e9l\u00e9charger l\u2019app',
+          dlHintIOS: 'Vous serez redirig\u00e9e vers l\u2019App Store',
+          dlHintAndroid: 'Vous serez redirig\u00e9e vers le Play Store',
+          openStep: 'Appuyez sur \u22ef en haut \u00e0 droite, puis\u00a0:',
+          openBrowser: 'Ouvrir dans le navigateur'
         },
         en: {
           title: 'Install Sororichill',
           subtitleIOS: 'Redirecting to the App Store\u2026',
           subtitleAndroid: 'Redirecting to the Play Store\u2026',
-          subtitleDesktop: 'Open this page on your phone to install the app.'
+          subtitleDesktop: 'Open this page on your phone to install the app.',
+          subtitleInApp: 'To download the app:',
+          dlBtn: 'Download the app',
+          dlHintIOS: 'You\u2019ll be taken to the App Store',
+          dlHintAndroid: 'You\u2019ll be taken to the Play Store',
+          openStep: 'Tap \u22ef at the top right, then:',
+          openBrowser: 'Open in browser'
         }
       };
       var t = strings[lang];
@@ -171,11 +288,40 @@
       document.getElementById('title').textContent = t.title;
       var subtitle = document.getElementById('subtitle');
 
-      if (sc.isIOS) { subtitle.textContent = t.subtitleIOS; return; }
-      if (sc.isAndroid) { subtitle.textContent = t.subtitleAndroid; return; }
+      // In-app browser: show "open in browser" instructions immediately.
+      // The browser-label link opens this same page in the system browser,
+      // where the auto-redirect to the store will work.
+      if (sc.isInAppBrowser && (sc.isIOS || sc.isAndroid)) {
+        subtitle.textContent = t.subtitleInApp;
+        var cta = document.getElementById('inapp-cta');
+        document.getElementById('inapp-step').textContent = t.openStep;
+        var link = document.getElementById('inapp-browser-link');
+        link.textContent = t.openBrowser;
+        link.href = sc.isIOS ? sc.APP_STORE_URL : sc.PLAY_STORE_URL;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        cta.classList.remove('hidden');
+        return;
+      }
+
+      if (sc.isIOS) { subtitle.textContent = t.subtitleIOS; showFallback(sc.APP_STORE_URL, t.dlBtn, t.dlHintIOS); return; }
+      if (sc.isAndroid) { subtitle.textContent = t.subtitleAndroid; showFallback(sc.PLAY_STORE_URL, t.dlBtn, t.dlHintAndroid); return; }
 
       subtitle.textContent = t.subtitleDesktop;
       document.getElementById('desktop-links').classList.add('show');
+
+      // Show a download button after 2s if auto-redirect didn't work
+      function showFallback(url, label, hint) {
+        setTimeout(function () {
+          var fb = document.getElementById('fallback-cta');
+          var btn = document.getElementById('fallback-btn');
+          var h = document.getElementById('fallback-hint');
+          btn.textContent = label;
+          btn.href = url;
+          h.textContent = hint;
+          fb.classList.remove('hidden');
+        }, 2000);
+      }
     })();
   </script>
 
