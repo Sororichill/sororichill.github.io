@@ -3,23 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sororichill</title>
-  <meta name="description" content="Opening Sororichill…">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
+  <title>Page not found — Sororichill</title>
+  <meta name="description" content="Page not found.">
   <meta name="theme-color" content="#C35817">
-  <meta property="og:title" content="Sororichill">
-  <meta property="og:description" content="Events & activities for sorority women.">
-  <meta property="og:image" content="https://sororichill.com/favicon.png">
-  <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="512">
-  <meta property="og:image:height" content="512">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Sororichill">
-  <meta name="twitter:description" content="Events & activities for sorority women.">
-  <meta name="twitter:image" content="https://sororichill.com/favicon.png">
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,78 +19,15 @@
   </style>
 </head>
 <body class="h-screen overflow-hidden bg-[#FFFDF8] text-[#1A1A1A] flex items-center justify-center">
-  <noscript>
-    <div class="max-w-xl mx-auto px-6 text-center">
-      <h1 class="heading text-3xl font-extrabold mb-4">Sororichill</h1>
-      <p class="mb-6">To open this link, please install the app:</p>
-      <p class="space-x-3">
-        <a class="underline" href="https://apps.apple.com/app/sororichill/id6760420583">App Store</a>
-        <a class="underline" href="https://play.google.com/store/apps/details?id=app.sororichill">Play Store</a>
-      </p>
-    </div>
-  </noscript>
-
-  <div id="loader" class="max-w-xl mx-auto px-6 text-center">
+  <div class="max-w-xl mx-auto px-6 text-center">
     <img src="/favicon.png" alt="Sororichill" class="mx-auto mb-6 w-24 h-24 rounded-2xl shadow-md">
-    <h1 class="heading text-3xl font-extrabold mb-3">Sororichill</h1>
-    <p class="text-[#5C3D2E] mb-8" id="loader-msg">Open this activity in the Sororichill app.</p>
-    <div id="store-links" class="flex flex-col sm:flex-row gap-3 justify-center"></div>
+    <h1 class="heading text-3xl font-extrabold mb-3">Page not found</h1>
+    <p class="text-[#5C3D2E] mb-8">This page doesn't exist. Head back to the homepage or download the app.</p>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="https://sororichill.com/" class="inline-block px-6 py-3 rounded-full bg-[#C35817] text-white font-semibold hover:bg-[#A84A14] transition">Back to sororichill.com</a>
+      <a href="https://apps.apple.com/app/sororichill/id6760420583" class="inline-block px-6 py-3 rounded-full border border-[#C35817] text-[#C35817] font-semibold hover:bg-[#FFF3EC] transition">App Store</a>
+      <a href="https://play.google.com/store/apps/details?id=app.sororichill" class="inline-block px-6 py-3 rounded-full border border-[#C35817] text-[#C35817] font-semibold hover:bg-[#FFF3EC] transition">Google Play</a>
+    </div>
   </div>
-
-  <script>
-    (function () {
-      var APP_STORE_URL  = 'https://apps.apple.com/app/sororichill/id6760420583';
-      var PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=app.sororichill';
-      var ANDROID_INSTALL_URL = '/install/';
-      var HOME_URL       = 'https://sororichill.com/';
-
-      var path = window.location.pathname || '';
-      var ua = navigator.userAgent || '';
-      var isAndroid = /android/i.test(ua);
-      var isIOS = /iphone|ipad|ipod/i.test(ua) ||
-                  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-
-      // Match /activities/<id> (with or without trailing slash or extra segments).
-      var activityMatch = path.match(/^\/activities\/([^\/?#]+)/);
-
-      function setMessage(msg) {
-        var el = document.getElementById('loader-msg');
-        if (el) el.textContent = msg;
-      }
-
-      function addStoreButton(href, label) {
-        var container = document.getElementById('store-links');
-        if (!container) return;
-        var a = document.createElement('a');
-        a.href = href;
-        a.className = 'inline-block px-6 py-3 rounded-full bg-[#C35817] text-white font-semibold hover:bg-[#A84A14] transition';
-        a.textContent = label;
-        container.appendChild(a);
-      }
-
-      if (!activityMatch) {
-        // Unknown path — show a soft 404 with a link home.
-        setMessage('Page not found.');
-        addStoreButton(HOME_URL, 'Back to sororichill.com');
-        return;
-      }
-
-      // Known activity path. If the app is installed, the Universal Link /
-      // App Link handoff intercepts BEFORE this page loads, so if we got
-      // here the app is not installed. Safe to auto-redirect to the
-      // appropriate install destination. Show a fallback button in case
-      // the redirect is blocked.
-      if (isIOS) {
-        addStoreButton(APP_STORE_URL, 'Get it on the App Store');
-        window.location.replace(APP_STORE_URL);
-      } else if (isAndroid) {
-        addStoreButton(ANDROID_INSTALL_URL, 'Get it on Google Play');
-        window.location.replace(ANDROID_INSTALL_URL);
-      } else {
-        addStoreButton(APP_STORE_URL, 'App Store');
-        addStoreButton(PLAY_STORE_URL, 'Google Play');
-      }
-    })();
-  </script>
 </body>
 </html>

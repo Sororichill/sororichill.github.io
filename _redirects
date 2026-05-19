@@ -1,0 +1,6 @@
+# SPA routing for guest booking app
+/events/*  /booking-app.html  200
+/ticket/*  /booking-app.html  200
+
+# Keep install page working
+/install/*  /install/index.html  200
